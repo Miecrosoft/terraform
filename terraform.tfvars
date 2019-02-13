@@ -1,0 +1,5 @@
+do_token = "REDACTED"
+image_instance = "ubuntu-18-04-x64"
+name_instance = "terraform-1"
+region_instance = "sgp1"
+size_instance = "s-1vcpu-1gb"
