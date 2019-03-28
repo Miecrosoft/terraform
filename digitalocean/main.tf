@@ -15,11 +15,6 @@ resource "digitalocean_droplet" "web" {
   }
 
   provisioner "remote-exec" {
-    inline = [
-      "apt update -y",
-      "apt install htop",
-      "cd /etc/",
-      "touch Z.lol"
-    ]
+    script = "files/exec.sh"
   }
 }
