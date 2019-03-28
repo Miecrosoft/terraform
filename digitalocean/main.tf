@@ -5,4 +5,21 @@ resource "digitalocean_droplet" "web" {
   region = "${var.region_instance}"
   size   = "${var.size_instance}"
   ssh_keys = "${var.ssh_keys_instance}"
+
+  provisioner "remote-exec" {
+    inline = [
+      "apt update -y",
+      "apt install htop",
+      "cd /etc/",
+      "touch Z.lol"
+    ]
+
+    connection {
+      type = "ssh"
+      user = "root"
+      host = "${digitalocean_droplet.web.ipv4_address}"
+      port = 22
+      timeout = "1m"
+    }
+  }
 }
