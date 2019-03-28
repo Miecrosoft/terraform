@@ -6,6 +6,14 @@ resource "digitalocean_droplet" "web" {
   size   = "${var.size_instance}"
   ssh_keys = "${var.ssh_keys_instance}"
 
+  connection {
+    type = "ssh"
+    user = "root"
+    host = "${digitalocean_droplet.web.ipv4_address}"
+    port = 22
+    timeout = "2m"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "apt update -y",
@@ -13,13 +21,5 @@ resource "digitalocean_droplet" "web" {
       "cd /etc/",
       "touch Z.lol"
     ]
-
-    connection {
-      type = "ssh"
-      user = "root"
-      host = "${digitalocean_droplet.web.ipv4_address}"
-      port = 22
-      timeout = "1m"
-    }
   }
 }
