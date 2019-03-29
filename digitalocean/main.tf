@@ -17,4 +17,8 @@ resource "digitalocean_droplet" "web" {
   provisioner "remote-exec" {
     script = "files/exec.sh"
   }
+
+  provisioner "local-exec" {
+    command = "echo ${self.ipv4_address} >> ip.txt"
+  }
 }
